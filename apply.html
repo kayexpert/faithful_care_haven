@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Application | Faithful Care Haven</title>
+<meta name="description" content="Apply for a position at Faithful Care Haven.">
+
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+
+  <!-- Sophisticated Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-content">
+      <div class="root-grow-animation">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50,90 Q30,70 30,50 Q30,30 50,20 Q70,30 70,50 Q70,70 50,90" fill="none" stroke="#B5601F" stroke-width="2" stroke-dasharray="150" stroke-dashoffset="150" style="animation:growRoot1 1.8s ease-out forwards;"/>
+          <path d="M50,90 L40,75 L45,75 L30,90" fill="none" stroke="#B5601F" stroke-width="2" stroke-dasharray="80" stroke-dashoffset="80" style="animation:growRoot2 1.8s ease-out forwards;"/>
+          <path d="M50,90 L60,75 L55,75 L70,90" fill="none" stroke="#B5601F" stroke-width="2" stroke-dasharray="80" stroke-dashoffset="80" style="animation:growRoot3 1.8s ease-out forwards;"/>
+          <circle cx="50" cy="50" r="8" fill="#B5601F" opacity="0.8" style="animation:pulse-preloader 1.5s ease-in-out infinite;"/>
+        </svg>
+      </div>
+      <div class="preloader-text">Faithful Care Haven</div>
+      <div class="preloader-subtitle">Loading your compassionate future</div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/img/logo.png" alt="Faithful Care Haven logo">
+        <span>Faithful Care Haven<small>Residential Placement Services</small></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn-primary btn-sm">24/7 Placement Line</a>
+      </div>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    </div>
+  </header>
+
+  <div class="mobile-overlay">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-outline-light">24/7 Placement Line</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="https://images.unsplash.com/photo-1758612215020-842383aadb9e?auto=format&fit=crop&w=2200&q=80" alt="A person typing on a laptop at a wooden desk">
+    </div>
+    <div class="container-wide">
+      <div class="breadcrumb-row"><a href="index.html">Home</a> / <a href="careers.html">Careers</a> / Apply</div>
+      <div class="page-hero-content" data-aos="fade-up">
+        <div class="eyebrow">Job Application</div>
+        <h1>Tell us about <em>yourself</em>.</h1>
+        <p>Fields marked with an asterisk (*) are required. This is a demo form &mdash; submissions are not sent anywhere yet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container-narrow">
+
+      <div id="applySuccess" class="success-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10" fill="#4b7a3f"/><path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <strong>Application received.</strong>
+          <p style="margin:.2em 0 0; color:#2f4a26;">Thank you &mdash; our hiring team will review your application and reach out if there's a fit. (Demo only: nothing was actually sent.)</p>
+        </div>
+      </div>
+
+      <form data-static-form="applySuccess" id="applyForm">
+        <div class="row g-4">
+          <div class="col-md-6 field-group">
+            <label class="field-label" for="firstName">First Name *</label>
+            <input class="form-control-lg" type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="col-md-6 field-group">
+            <label class="field-label" for="lastName">Last Name *</label>
+            <input class="form-control-lg" type="text" id="lastName" name="lastName" required>
+          </div>
+          <div class="col-md-6 field-group">
+            <label class="field-label" for="email">Email Address *</label>
+            <input class="form-control-lg" type="email" id="email" name="email" required>
+          </div>
+          <div class="col-md-6 field-group">
+            <label class="field-label" for="phone">Phone Number *</label>
+            <input class="form-control-lg" type="tel" id="phone" name="phone" required>
+          </div>
+
+          <div class="col-md-8 field-group">
+            <label class="field-label" for="position">Position Applying For *</label>
+            <select class="form-control-lg" id="position" name="position" required>
+              <option value="" disabled selected>Select a position</option>
+              <option>Residential Youth Care Worker</option>
+              <option>Overnight Support Worker</option>
+              <option>Life Skills Coordinator</option>
+              <option>Program Supervisor</option>
+              <option>General Application</option>
+            </select>
+          </div>
+          <div class="col-md-4 field-group">
+            <label class="field-label" for="availability">Availability *</label>
+            <select class="form-control-lg" id="availability" name="availability" required>
+              <option value="" disabled selected>Select</option>
+              <option>Full-Time</option>
+              <option>Part-Time</option>
+              <option>Overnight Only</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+
+          <div class="col-12 field-group">
+            <label class="field-label" for="experience">Relevant Experience *</label>
+            <textarea class="form-control-lg" id="experience" name="experience" required placeholder="Tell us about your experience working with children, youth, or in residential/social care settings."></textarea>
+          </div>
+
+          <div class="col-12 field-group">
+            <label class="field-label" for="certs">Current Certifications (if any)</label>
+            <input class="form-control-lg" type="text" id="certs" name="certs" placeholder="e.g. First Aid/CPR, Vulnerable Sector Screening, CPI">
+          </div>
+
+          <div class="col-12 field-group">
+            <label class="field-label">Resume / CV *</label>
+            <div class="file-drop">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" style="margin-bottom:10px;"><path d="M12 16V4M12 4l-4 4M12 4l4 4M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke="#B5601F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div class="file-drop-text" style="font-weight:600; color:var(--pine-d);">Click to upload, or drag your file here</div>
+              <div style="font-size:.78rem; color:var(--ink-soft); margin-top:4px;">PDF or DOCX, up to 10MB</div>
+            </div>
+            <input type="file" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx" style="display:none;" required>
+          </div>
+
+          <div class="col-12 field-group">
+            <label style="display:flex; align-items:flex-start; gap:10px; font-size:.9rem; color:var(--ink-soft); cursor:pointer;">
+              <input type="checkbox" required style="margin-top:4px;">
+              I consent to a Vulnerable Sector Screening and background check as a condition of employment, in accordance with Ontario child welfare requirements.
+            </label>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var pos = params.get('position');
+      if (pos) {
+        var select = document.getElementById('position');
+        for (var i = 0; i < select.options.length; i++) {
+          if (select.options[i].text === pos) { select.selectedIndex = i; break; }
+        }
+      }
+    })();
+  </script>
+
+
+  <footer class="site-footer">
+    <div class="container-wide">
+      <div class="row gy-5">
+        <div class="col-lg-4">
+          <div class="footer-brand">
+            <img src="assets/img/logo.png" alt="Faithful Care Haven">
+            <span>Faithful Care Haven</span>
+          </div>
+          <p style="max-width:320px;">Residential placement care for children and youth in Ottawa, Ontario &mdash; grounded in stability, dignity, and trauma-informed support, in partnership with Children&rsquo;s Aid Society.</p>
+          <div class="social-row" aria-hidden="true">
+            <a href="#" onclick="return false;" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v7h4v-7h3l1-4h-4V9c0-.6.4-1 1-1z" fill="currentColor"/></svg>
+            </a>
+            <a href="#" onclick="return false;" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2 3.76-2 4 0 4.74 2.6 4.74 6V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.4-2.05 2.8V21h-4V9z" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h4>Explore</h4>
+          <p><a href="about.html">About Us</a></p>
+          <p><a href="services.html">Our Services</a></p>
+          <p><a href="careers.html">Careers</a></p>
+          <p><a href="contact.html">Contact</a></p>
+        </div>
+        <div class="col-lg-3 col-6">
+          <h4>Careers</h4>
+          <p><a href="careers.html">Open Positions</a></p>
+          <p><a href="apply.html">Application Form</a></p>
+        </div>
+        <div class="col-lg-3">
+          <h4>Contact</h4>
+          <p><a href="mailto:Faithfulcarehaven@gmail.com">Faithfulcarehaven@gmail.com</a></p>
+          <p><a href="tel:12897003031">289 700 3031</a></p>
+          <p><a href="tel:16138905872">613 890 5872</a></p>
+          <p>Ottawa, Ontario</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span class="current-year"></span> Faithful Care Haven. All rights reserved.</span>
+        <span>Licensed Residential Care Provider &mdash; Ottawa, ON</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+</html>
