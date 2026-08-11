@@ -444,6 +444,9 @@ section {
   transition: transform .32s var(--ease), opacity .28s var(--ease);
   opacity: .95;
   color: inherit;
+  /* ensure the arrow uses a reliable glyph (avoid colored emoji fallback on some mobile browsers) */
+  font-family: Public Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
 }
 
 .btn:hover::after {
@@ -473,6 +476,8 @@ section {
   transition: transform .28s var(--ease), opacity .22s var(--ease);
   opacity: .95;
   color: inherit;
+  font-family: Public Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
 }
 
 .ssc-link:hover::after {
