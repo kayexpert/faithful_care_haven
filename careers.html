@@ -86,62 +86,55 @@
 
       <div id="jobs-container"></div>
       
+      <script src="jobs.js"></script>
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          fetch('jobs.json')
-            .then(response => response.json())
-            .then(jobs => {
-              const container = document.getElementById('jobs-container');
-              const heading = document.getElementById('jobs-heading');
-              
-              if (jobs.length === 0) {
-                heading.textContent = "No open roles at the moment";
-                return;
-              }
-              
-              heading.textContent = jobs.length + " roles currently hiring";
-              
-              jobs.forEach((job, index) => {
-                const delay = (index % 4) * 80;
-                const encodedPosition = encodeURIComponent(job.title);
-                const tagsHtml = job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('');
-                
-                const jobHtml = `
-                  <div class="job-card" data-aos="fade-up" data-aos-delay="${delay}">
-                    <div>
-                      <h3 style="margin-bottom:.3em;">${job.title}</h3>
-                      <p style="margin:0;">${job.description}</p>
-                      <div class="job-tags">
-                        ${tagsHtml}
-                      </div>
-                    </div>
-                    <a href="apply.html?position=${encodedPosition}" class="btn btn-dark btn-sm">Apply Now</a>
+          const jobs = window.JOBS_DATA || [];
+          const container = document.getElementById('jobs-container');
+          const heading = document.getElementById('jobs-heading');
+          
+          if (jobs.length === 0) {
+            heading.textContent = "No open roles at the moment";
+            return;
+          }
+          
+          heading.textContent = jobs.length + " roles currently hiring";
+          
+          jobs.forEach((job, index) => {
+            const delay = (index % 4) * 80;
+            const encodedPosition = encodeURIComponent(job.title);
+            const tagsHtml = job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('');
+            
+            const jobHtml = `
+              <div class="job-card" data-aos="fade-up" data-aos-delay="${delay}">
+                <div>
+                  <h3 style="margin-bottom:.3em;">${job.title}</h3>
+                  <p style="margin:0;">${job.description}</p>
+                  <div class="job-tags">
+                    ${tagsHtml}
                   </div>
-                `;
-                container.insertAdjacentHTML('beforeend', jobHtml);
-              });
-              
-              // Trigger scroll to initialize the custom reveal logic for newly added elements
-              setTimeout(() => {
-                const revealEls = container.querySelectorAll('[data-aos]');
-                if ('IntersectionObserver' in window) {
-                  // Re-use the logic from main.js or just force them visible if missed
-                  revealEls.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight) {
-                      setTimeout(() => el.classList.add('aos-in'), parseInt(el.getAttribute('data-aos-delay') || 0));
-                    }
-                  });
-                  window.dispatchEvent(new Event('scroll'));
-                } else {
-                  revealEls.forEach(el => el.classList.add('aos-in'));
+                </div>
+                <a href="apply.html?position=${encodedPosition}" class="btn btn-dark btn-sm">Apply Now</a>
+              </div>
+            `;
+            container.insertAdjacentHTML('beforeend', jobHtml);
+          });
+          
+          // Trigger scroll to initialize the custom reveal logic for newly added elements
+          setTimeout(() => {
+            const revealEls = container.querySelectorAll('[data-aos]');
+            if ('IntersectionObserver' in window) {
+              revealEls.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                  setTimeout(() => el.classList.add('aos-in'), parseInt(el.getAttribute('data-aos-delay') || 0));
                 }
-              }, 100);
-            })
-            .catch(err => {
-              document.getElementById('jobs-heading').textContent = "Unable to load roles";
-              console.error('Error loading jobs:', err);
-            });
+              });
+              window.dispatchEvent(new Event('scroll'));
+            } else {
+              revealEls.forEach(el => el.classList.add('aos-in'));
+            }
+          }, 100);
         });
       </script>
     </div>

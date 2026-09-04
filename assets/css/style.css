@@ -2743,7 +2743,7 @@ section {
 }
 
 .success-box {
-  display: flex;
+  display: none;
   gap: 12px;
   align-items: center;
   background: rgba(74,124,95,0.06);
@@ -2751,6 +2751,11 @@ section {
   border-radius: 10px;
   border: 1px solid rgba(31,50,41,0.04);
   margin-bottom: 20px;
+}
+
+.success-box.show {
+  display: flex;
+  animation: slideIn .5s var(--ease);
 }
 
 .field-label {

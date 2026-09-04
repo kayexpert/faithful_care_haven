@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <form data-static-form="applySuccess" id="applyForm" action="https://formspree.io/f/xoeqllaq" method="POST" enctype="multipart/form-data">
+      <form data-static-form="applySuccess" id="applyForm" action="https://formspree.io/f/xyeypdnw" method="POST" enctype="multipart/form-data">
         <div class="row g-4">
           <div class="col-md-6 field-group">
             <label class="field-label" for="firstName">First Name *</label>
@@ -113,10 +113,7 @@
             <label class="field-label" for="position">Position Applying For *</label>
             <select class="form-control-lg" id="position" name="position" required>
               <option value="" disabled selected>Select a position</option>
-              <option>Residential Youth Care Worker</option>
-              <option>Overnight Support Worker</option>
-              <option>Life Skills Coordinator</option>
-              <option>Program Supervisor</option>
+
               <option>General Application</option>
             </select>
           </div>
@@ -142,13 +139,17 @@
           </div>
 
           <div class="col-12 field-group">
-            <label class="field-label">Resume / CV *</label>
-            <div class="file-drop">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" style="margin-bottom:10px;"><path d="M12 16V4M12 4l-4 4M12 4l4 4M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke="#B5601F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div class="file-drop-text" style="font-weight:600; color:var(--pine-d);">Click to upload, or drag your file here</div>
-              <div style="font-size:.78rem; color:var(--ink-soft); margin-top:4px;">PDF or DOCX, up to 10MB</div>
-            </div>
-            <input type="file" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx" style="display:none;" required>
+            <label class="field-label" for="resumeLink">Resume / CV Link *</label>
+            <input class="form-control-lg" type="url" id="resumeLink" name="resume_link" required
+              placeholder="Paste a link to your resume (Google Drive, Dropbox, OneDrive, LinkedIn, etc.)">
+            <p style="font-size:.8rem; color:var(--ink-soft); margin-top:6px; margin-bottom:0;">
+              Upload your resume to <strong>Google Drive</strong> or <strong>Dropbox</strong>, set it to "Anyone with the link can view", then paste the link here.
+            </p>
+          </div>
+
+          <div class="col-12 field-group">
+            <label class="field-label" for="coverLetter">Cover Letter / Why Faithful Care Haven?</label>
+            <textarea class="form-control-lg" id="coverLetter" name="cover_letter" placeholder="Tell us why you'd like to join our team and what makes you a great fit for this role."></textarea>
           </div>
 
           <div class="col-12 field-group">
@@ -166,12 +167,24 @@
     </div>
   </section>
 
+  <script src="jobs.js"></script>
   <script>
     (function () {
+      var select = document.getElementById('position');
+      
+      if (window.JOBS_DATA) {
+        var generalOption = select.options[select.options.length - 1];
+        window.JOBS_DATA.forEach(function(job) {
+          var option = document.createElement('option');
+          option.text = job.title;
+          option.value = job.title;
+          select.insertBefore(option, generalOption);
+        });
+      }
+
       var params = new URLSearchParams(window.location.search);
       var pos = params.get('position');
       if (pos) {
-        var select = document.getElementById('position');
         for (var i = 0; i < select.options.length; i++) {
           if (select.options[i].text === pos) { select.selectedIndex = i; break; }
         }

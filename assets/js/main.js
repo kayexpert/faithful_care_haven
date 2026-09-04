@@ -5,11 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------- Preloader fade out ---------- */
   var preloader = document.getElementById('preloader');
   if (preloader) {
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        preloader.classList.add('loaded');
-      }, 800);
-    });
+    // Hide shortly after DOM is ready to avoid waiting for heavy images
+    setTimeout(function () {
+      preloader.classList.add('loaded');
+    }, 250);
   }
 
   /* ---------- Homepage hero ---------- */

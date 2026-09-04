@@ -39,14 +39,15 @@
       <span class="help-text">Separate each tag with a comma.</span>
     </div>
     
-    <button id="addJobBtn">Generate Updated jobs.json</button>
+    <button id="addJobBtn">Generate Updated jobs.js</button>
     
     <div id="successBox" class="success">
-      <strong>Success!</strong> The <code>jobs.json</code> file has been downloaded. 
+      <strong>Success!</strong> The <code>jobs.js</code> file has been downloaded. 
       Please move it into your <code>faithfulcare_haven</code> folder to replace the old one, then push your changes to GitHub.
     </div>
   </div>
 
+  <script src="jobs.js"></script>
   <script>
     document.getElementById('addJobBtn').addEventListener('click', function() {
       const title = document.getElementById('title').value.trim();
@@ -59,31 +60,21 @@
       }
       
       const tags = tagsStr ? tagsStr.split(',').map(t => t.trim()).filter(t => t) : [];
-      
       const newJob = { title, description, tags };
       
-      // Try to fetch existing jobs if this is running on a local server, otherwise start fresh
-      fetch('jobs.json')
-        .then(response => {
-          if (!response.ok) throw new Error('Network response was not ok');
-          return response.json();
-        })
-        .then(jobs => {
-          jobs.unshift(newJob); // add to top
-          downloadJson(jobs);
-        })
-        .catch(err => {
-          console.log("Could not load existing jobs.json, starting fresh or creating a new list.", err);
-          downloadJson([newJob]);
-        });
+      const jobs = window.JOBS_DATA || [];
+      jobs.unshift(newJob);
+      
+      downloadJs(jobs);
     });
     
-    function downloadJson(data) {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+    function downloadJs(data) {
+      const jsContent = "window.JOBS_DATA = " + JSON.stringify(data, null, 2) + ";";
+      const dataStr = "data:text/javascript;charset=utf-8," + encodeURIComponent(jsContent);
       const downloadAnchorNode = document.createElement('a');
-      downloadAnchorNode.setAttribute("href",     dataStr);
-      downloadAnchorNode.setAttribute("download", "jobs.json");
-      document.body.appendChild(downloadAnchorNode); // required for firefox
+      downloadAnchorNode.setAttribute("href", dataStr);
+      downloadAnchorNode.setAttribute("download", "jobs.js");
+      document.body.appendChild(downloadAnchorNode);
       downloadAnchorNode.click();
       downloadAnchorNode.remove();
       
