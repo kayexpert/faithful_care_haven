@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE" />
 <title>Contact | Faithful Care Haven</title>
 <meta name="description" content="Contact Faithful Care Haven for placement inquiries, available 24/7.">
 
@@ -97,8 +98,8 @@
               </div>
               <div>
                 <h3>Phone</h3>
-                <p><a href="tel:12897003031">289 700 3031</a></p>
-                <p><a href="tel:16138905872">613 890 5872</a></p>
+                <p><a href="tel:12897003031">+1 289 700 3031</a></p>
+                <p><a href="tel:16138905872">+1 613 890 5872</a></p>
               </div>
             </article>
 
@@ -145,23 +146,23 @@
               <h2>Tell us about your needs</h2>
             </div>
 
-            <form data-static-form="contactSuccess">
+            <form data-static-form="contactSuccess" action="https://formspree.io/f/xoeqllaq" method="POST">
               <div class="row g-4">
                 <div class="col-md-6 field-group">
                   <label class="field-label" for="cname">Full Name *</label>
-                  <input class="form-control-lg" type="text" id="cname" required>
+                  <input class="form-control-lg" type="text" id="cname" name="name" required>
                 </div>
                 <div class="col-md-6 field-group">
                   <label class="field-label" for="cemail">Email Address *</label>
-                  <input class="form-control-lg" type="email" id="cemail" required>
+                  <input class="form-control-lg" type="email" id="cemail" name="email" required>
                 </div>
                 <div class="col-md-6 field-group">
                   <label class="field-label" for="corg">Organization (if applicable)</label>
-                  <input class="form-control-lg" type="text" id="corg" placeholder="e.g. Children's Aid Society">
+                  <input class="form-control-lg" type="text" id="corg" name="organization" placeholder="e.g. Children's Aid Society">
                 </div>
                 <div class="col-md-6 field-group">
                   <label class="field-label" for="creason">Reason for Inquiry *</label>
-                  <select class="form-control-lg" id="creason" required>
+                  <select class="form-control-lg" id="creason" name="reason" required>
                     <option value="" disabled selected>Select one</option>
                     <option>Placement Referral</option>
                     <option>General Inquiry</option>
@@ -171,7 +172,7 @@
                 </div>
                 <div class="col-12 field-group">
                   <label class="field-label" for="cmessage">Message *</label>
-                  <textarea class="form-control-lg" id="cmessage" required placeholder="How can we help?"></textarea>
+                  <textarea class="form-control-lg" id="cmessage" name="message" required placeholder="How can we help?"></textarea>
                 </div>
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary btn-block">Send Message</button>
@@ -238,15 +239,14 @@
       <div class="col-lg-3">
         <h4>Contact</h4>
         <p><a href="mailto:Faithfulcarehaven@gmail.com">Faithfulcarehaven@gmail.com</a></p>
-        <p><a href="tel:12897003031">289 700 3031</a></p>
-        <p><a href="tel:16138905872">613 890 5872</a></p>
+        <p><a href="tel:12897003031">+1 289 700 3031</a></p>
+        <p><a href="tel:16138905872">+1 613 890 5872</a></p>
         <p>Ottawa, Ontario</p>
       </div>
     </div>
 
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="display: flex; justify-content: center;">
       <span>&copy; <span class="current-year"></span> Faithful Care Haven. All rights reserved.</span>
-      <span>Licensed Residential Care Provider &mdash; Ottawa, ON</span>
     </div>
   </div>
 </footer>

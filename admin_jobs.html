@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Admin | Faithful Care Haven</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f4f4f5; padding: 40px; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { margin-top: 0; color: #2c3e50; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; }
+    input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+    textarea { height: 100px; resize: vertical; }
+    .help-text { font-size: 0.85em; color: #666; margin-top: 5px; display: block; }
+    button { background: #B5601F; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #964d17; }
+    hr { border: none; border-top: 1px solid #eee; margin: 30px 0; }
+    .success { display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Add a New Job</h1>
+    <p>Use this tool to add a new job listing to your website. Fill out the details below, and it will generate an updated <code>jobs.json</code> file for you to save in your project.</p>
+    
+    <div class="form-group">
+      <label for="title">Job Title</label>
+      <input type="text" id="title" placeholder="e.g. Registered Nurse">
+    </div>
+    
+    <div class="form-group">
+      <label for="description">Job Description</label>
+      <textarea id="description" placeholder="A brief description of the role and responsibilities..."></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="tags">Tags (comma separated)</label>
+      <input type="text" id="tags" placeholder="e.g. Full-Time, Days, Ottawa, ON">
+      <span class="help-text">Separate each tag with a comma.</span>
+    </div>
+    
+    <button id="addJobBtn">Generate Updated jobs.json</button>
+    
+    <div id="successBox" class="success">
+      <strong>Success!</strong> The <code>jobs.json</code> file has been downloaded. 
+      Please move it into your <code>faithfulcare_haven</code> folder to replace the old one, then push your changes to GitHub.
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('addJobBtn').addEventListener('click', function() {
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const tagsStr = document.getElementById('tags').value.trim();
+      
+      if (!title || !description) {
+        alert("Please provide at least a title and description.");
+        return;
+      }
+      
+      const tags = tagsStr ? tagsStr.split(',').map(t => t.trim()).filter(t => t) : [];
+      
+      const newJob = { title, description, tags };
+      
+      // Try to fetch existing jobs if this is running on a local server, otherwise start fresh
+      fetch('jobs.json')
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.json();
+        })
+        .then(jobs => {
+          jobs.unshift(newJob); // add to top
+          downloadJson(jobs);
+        })
+        .catch(err => {
+          console.log("Could not load existing jobs.json, starting fresh or creating a new list.", err);
+          downloadJson([newJob]);
+        });
+    });
+    
+    function downloadJson(data) {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+      const downloadAnchorNode = document.createElement('a');
+      downloadAnchorNode.setAttribute("href",     dataStr);
+      downloadAnchorNode.setAttribute("download", "jobs.json");
+      document.body.appendChild(downloadAnchorNode); // required for firefox
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+      
+      document.getElementById('successBox').style.display = 'block';
+      
+      // Clear form
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('tags').value = '';
+    }
+  </script>
+</body>
+</html>

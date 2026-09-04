@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="YOUR_GSC_VERIFICATION_CODE_HERE" />
 <title>Careers | Faithful Care Haven</title>
 <meta name="description" content="Join the Faithful Care Haven residential care team in Ottawa, Ontario.">
 
@@ -81,60 +82,68 @@
   <section>
     <div class="container-wide">
       <div class="eyebrow" data-aos="fade-up">Open positions</div>
-      <h2 data-aos="fade-up" style="margin-bottom:36px;">4 roles currently hiring in Ottawa</h2>
+      <h2 data-aos="fade-up" style="margin-bottom:36px;" id="jobs-heading">Loading roles...</h2>
 
-      <div class="job-card" data-aos="fade-up" data-aos-delay="0">
-        <div>
-          <h3 style="margin-bottom:.3em;">Residential Youth Care Worker</h3>
-          <p style="margin:0;">Provide direct, trauma-informed care and supervision to children and youth in our residential home, supporting daily routines, life skills, and individual care plans.</p>
-          <div class="job-tags">
-            <span class="job-tag">Full-Time</span>
-            <span class="job-tag">Rotating Shifts</span>
-            <span class="job-tag">Ottawa, ON</span>
-          </div>
-        </div>
-        <a href="apply.html?position=Residential+Youth+Care+Worker" class="btn btn-dark btn-sm">Apply Now</a>
-      </div>
-
-      <div class="job-card" data-aos="fade-up" data-aos-delay="80">
-        <div>
-          <h3 style="margin-bottom:.3em;">Overnight Support Worker</h3>
-          <p style="margin:0;">Maintain a safe, calm overnight environment, complete documentation, and respond to the individual needs of children and youth in care.</p>
-          <div class="job-tags">
-            <span class="job-tag">Part-Time</span>
-            <span class="job-tag">Overnight</span>
-            <span class="job-tag">Ottawa, ON</span>
-          </div>
-        </div>
-        <a href="apply.html?position=Overnight+Support+Worker" class="btn btn-dark btn-sm">Apply Now</a>
-      </div>
-
-      <div class="job-card" data-aos="fade-up" data-aos-delay="160">
-        <div>
-          <h3 style="margin-bottom:.3em;">Life Skills Coordinator</h3>
-          <p style="margin:0;">Design and deliver life skills programming &mdash; communication, decision-making, and employment readiness &mdash; tailored to each youth's Plan of Care.</p>
-          <div class="job-tags">
-            <span class="job-tag">Full-Time</span>
-            <span class="job-tag">Weekdays</span>
-            <span class="job-tag">Ottawa, ON</span>
-          </div>
-        </div>
-        <a href="apply.html?position=Life+Skills+Coordinator" class="btn btn-dark btn-sm">Apply Now</a>
-      </div>
-
-      <div class="job-card" data-aos="fade-up" data-aos-delay="240">
-        <div>
-          <h3 style="margin-bottom:.3em;">Program Supervisor</h3>
-          <p style="margin:0;">Oversee daily operations, staff scheduling, and quality of care, ensuring compliance with Ontario child welfare standards and CAS requirements.</p>
-          <div class="job-tags">
-            <span class="job-tag">Full-Time</span>
-            <span class="job-tag">Days</span>
-            <span class="job-tag">Ottawa, ON</span>
-          </div>
-        </div>
-        <a href="apply.html?position=Program+Supervisor" class="btn btn-dark btn-sm">Apply Now</a>
-      </div>
-
+      <div id="jobs-container"></div>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          fetch('jobs.json')
+            .then(response => response.json())
+            .then(jobs => {
+              const container = document.getElementById('jobs-container');
+              const heading = document.getElementById('jobs-heading');
+              
+              if (jobs.length === 0) {
+                heading.textContent = "No open roles at the moment";
+                return;
+              }
+              
+              heading.textContent = jobs.length + " roles currently hiring";
+              
+              jobs.forEach((job, index) => {
+                const delay = (index % 4) * 80;
+                const encodedPosition = encodeURIComponent(job.title);
+                const tagsHtml = job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('');
+                
+                const jobHtml = `
+                  <div class="job-card" data-aos="fade-up" data-aos-delay="${delay}">
+                    <div>
+                      <h3 style="margin-bottom:.3em;">${job.title}</h3>
+                      <p style="margin:0;">${job.description}</p>
+                      <div class="job-tags">
+                        ${tagsHtml}
+                      </div>
+                    </div>
+                    <a href="apply.html?position=${encodedPosition}" class="btn btn-dark btn-sm">Apply Now</a>
+                  </div>
+                `;
+                container.insertAdjacentHTML('beforeend', jobHtml);
+              });
+              
+              // Trigger scroll to initialize the custom reveal logic for newly added elements
+              setTimeout(() => {
+                const revealEls = container.querySelectorAll('[data-aos]');
+                if ('IntersectionObserver' in window) {
+                  // Re-use the logic from main.js or just force them visible if missed
+                  revealEls.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                      setTimeout(() => el.classList.add('aos-in'), parseInt(el.getAttribute('data-aos-delay') || 0));
+                    }
+                  });
+                  window.dispatchEvent(new Event('scroll'));
+                } else {
+                  revealEls.forEach(el => el.classList.add('aos-in'));
+                }
+              }, 100);
+            })
+            .catch(err => {
+              document.getElementById('jobs-heading').textContent = "Unable to load roles";
+              console.error('Error loading jobs:', err);
+            });
+        });
+      </script>
     </div>
   </section>
 
@@ -222,15 +231,14 @@
       <div class="col-lg-3">
         <h4>Contact</h4>
         <p><a href="mailto:Faithfulcarehaven@gmail.com">Faithfulcarehaven@gmail.com</a></p>
-        <p><a href="tel:12897003031">289 700 3031</a></p>
-        <p><a href="tel:16138905872">613 890 5872</a></p>
+        <p><a href="tel:12897003031">+1 289 700 3031</a></p>
+        <p><a href="tel:16138905872">+1 613 890 5872</a></p>
         <p>Ottawa, Ontario</p>
       </div>
     </div>
 
-    <div class="footer-bottom">
+   <div class="footer-bottom" style="display: flex; justify-content: center;">
       <span>&copy; <span class="current-year"></span> Faithful Care Haven. All rights reserved.</span>
-      <span>Licensed Residential Care Provider &mdash; Ottawa, ON</span>
     </div>
   </div>
 </footer>

@@ -2944,7 +2944,7 @@ button:focus-visible,
   z-index: 1;
   background-image: 
     linear-gradient(to right, rgba(248, 245, 240, 1) 0%, rgba(248, 245, 240, 0.98) 40%, rgba(248, 245, 240, 0.85) 68%, rgba(248, 245, 240, 0) 88%),
-    url('/assets/img/poc_bg.jpg');
+    url('../img/who_we_serve_bg.jpg');
   background-size: cover;
   background-position: right center;
 }

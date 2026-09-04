@@ -143,12 +143,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Generic front-end-only form submit handler ---------- */
+  /* ---------- Formspree Submit Handler ---------- */
   document.querySelectorAll('form[data-static-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // simple required-field check so the demo feels real
+      // simple required-field check
       var valid = true;
       form.querySelectorAll('[required]').forEach(function (field) {
         if (!field.value || (field.type === 'checkbox' && !field.checked)) {
@@ -168,20 +168,45 @@ document.addEventListener('DOMContentLoaded', function () {
         var originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = 'Sending…';
         submitBtn.disabled = true;
-        setTimeout(function () {
+
+        var data = new FormData(form);
+        var action = form.getAttribute('action');
+
+        fetch(action, {
+          method: 'POST',
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        }).then(response => {
           submitBtn.innerHTML = originalText;
           submitBtn.disabled = false;
-          form.reset();
-          var dropText = form.querySelector('.file-drop-text');
-          if (dropText) dropText.textContent = 'Click to upload, or drag your file here';
-          var dropZone = form.querySelector('.file-drop');
-          if (dropZone) dropZone.classList.remove('has-file');
-          if (successBox) {
-            successBox.classList.add('show');
-            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            setTimeout(function () { successBox.classList.remove('show'); }, 7000);
+          if (response.ok) {
+            form.reset();
+            var dropText = form.querySelector('.file-drop-text');
+            if (dropText) dropText.textContent = 'Click to upload, or drag your file here';
+            var dropZone = form.querySelector('.file-drop');
+            if (dropZone) dropZone.classList.remove('has-file');
+            if (successBox) {
+              successBox.querySelector('p').textContent = "Thank you — our team will review and respond shortly.";
+              successBox.classList.add('show');
+              successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              setTimeout(function () { successBox.classList.remove('show'); }, 7000);
+            }
+          } else {
+            response.json().then(data => {
+              if (Object.hasOwn(data, 'errors')) {
+                alert(data["errors"].map(error => error["message"]).join(", "));
+              } else {
+                alert("Oops! There was a problem submitting your form");
+              }
+            })
           }
-        }, 900);
+        }).catch(error => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          alert("Oops! There was a problem submitting your form");
+        });
       }
     });
   });
